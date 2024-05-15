@@ -58,3 +58,13 @@ Client prisma:
 npm i @prisma/client
 ```
 
+* Passport:
+
+```
+To configure auth module:
+npm i @nestjs/passport @nestjs/jwt passport passport-jwt passport-local
+
+For add types, with development dependency:
+npm i -D @types/passport-jwt @types/passport-local
+```
+
