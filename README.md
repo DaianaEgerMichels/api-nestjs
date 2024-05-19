@@ -67,4 +67,9 @@ npm i @nestjs/passport @nestjs/jwt passport passport-jwt passport-local
 For add types, with development dependency:
 npm i -D @types/passport-jwt @types/passport-local
 ```
+* Fields validator:
 
+```
+To use validator nestjs:
+npm i --save class-validator class-transformer
+```
