@@ -20,11 +20,11 @@ export class User {
     this._id = id || randomUUID();
   }
 
-  get id() {
+  get id(): string {
     return this._id;
   }
 
-  get email() {
+  get email(): string {
     return this.props.email;
   }
 
@@ -32,7 +32,7 @@ export class User {
     this.props.email = email;
   }
 
-  get password() {
+  get password(): string {
     return this.props.password;
   }
 
@@ -40,7 +40,7 @@ export class User {
     this.props.password = password;
   }
 
-  get name() {
+  get name(): string {
     return this.props.name;
   }
 
@@ -48,7 +48,7 @@ export class User {
     this.props.name = name;
   }
 
-  get createdAt() {
+  get createdAt(): Date {
     return this.props.createdAt;
   }
 }
