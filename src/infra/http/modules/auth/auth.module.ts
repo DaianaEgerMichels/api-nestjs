@@ -5,11 +5,20 @@ import { ValidateUserUseCase } from 'src/modules/auth/useCases/validateUserUseCa
 import { UserModule } from '../user/user.module';
 import { DatabaseModule } from 'src/infra/database/database.module';
 import { LoginDtoValidateMiddleware } from './middleware/loginDtoValidate.middleware';
+import { LoginUseCase } from 'src/modules/auth/useCases/loginUseCase/loginUseCase';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
-  imports: [UserModule, DatabaseModule], // for access user repository in this module
+  imports: [
+    UserModule,
+    DatabaseModule,
+    JwtModule.register({
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: process.env.JWT_EXPIRES_IN },
+    }),
+  ], // for access user repository in this module
   controllers: [AuthController],
-  providers: [LocalStrategy, ValidateUserUseCase],
+  providers: [LocalStrategy, ValidateUserUseCase, LoginUseCase],
 })
 export class AuthModule {
   configure(consumer: MiddlewareConsumer) {
