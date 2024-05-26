@@ -1,13 +1,15 @@
 import { Controller, HttpCode, HttpStatus, Post, UseGuards, Request } from '@nestjs/common';
 import { AuthRequestModel } from './models/authRequestModel';
 import { LoginUseCase } from 'src/modules/auth/useCases/loginUseCase/loginUseCase';
-import { LocalAuthGuard } from './guards/localAuthGuard';
+import { LocalAuthGuard } from './guards/localAuth.guard';
+import { Public } from './decorators/isPublic';
 
 @Controller('/auth')
 export class AuthController {
   constructor(private loginUseCase: LoginUseCase) {}
 
   @Post('/login')
+  @Public()
   @HttpCode(HttpStatus.OK)
   @UseGuards(LocalAuthGuard)
   async login(@Request() request: AuthRequestModel) {
