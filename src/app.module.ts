@@ -2,10 +2,16 @@ import { Module } from '@nestjs/common';
 import { UserModule } from './infra/http/modules/user/user.module';
 import { DatabaseModule } from './infra/database/database.module';
 import { AuthModule } from './infra/http/modules/auth/auth.module';
+import { JwtAuthGuard } from './infra/http/modules/auth/guards/jwtAuthGuard';
 
 @Module({
   imports: [DatabaseModule, UserModule, AuthModule],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: 'APP_GUARD',
+      useClass: JwtAuthGuard,
+    },
+  ],
 })
 export class AppModule {}

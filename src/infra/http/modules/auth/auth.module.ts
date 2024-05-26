@@ -7,6 +7,7 @@ import { DatabaseModule } from 'src/infra/database/database.module';
 import { LoginDtoValidateMiddleware } from './middleware/loginDtoValidate.middleware';
 import { LoginUseCase } from 'src/modules/auth/useCases/loginUseCase/loginUseCase';
 import { JwtModule } from '@nestjs/jwt';
+import { JwtStrategy } from 'src/modules/auth/strategies/jwt.strategy';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { JwtModule } from '@nestjs/jwt';
     }),
   ], // for access user repository in this module
   controllers: [AuthController],
-  providers: [LocalStrategy, ValidateUserUseCase, LoginUseCase],
+  providers: [LocalStrategy, JwtStrategy, ValidateUserUseCase, LoginUseCase],
 })
 export class AuthModule {
   configure(consumer: MiddlewareConsumer) {
