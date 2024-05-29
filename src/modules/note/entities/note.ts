@@ -12,7 +12,7 @@ export class Note {
   private props: NoteProps;
   private _id: string;
 
-  constructor(props: Replace<NoteProps, { createdAt?: Date; description?: string }>, id?: string) {
+  constructor(props: Replace<NoteProps, { createdAt?: Date; description?: string | null }>, id?: string) {
     this.props = {
       ...props,
       createdAt: props.createdAt ?? new Date(),
