@@ -22,4 +22,18 @@ describe('Delete Note - UseCase', () => {
     await deleteNoteUseCase.execute({ noteId: note.id, userId: user.id });
     expect(noteRepositoryInMemory.notes).toHaveLength(0);
   });
+
+  it('should be able to throw error if note not found', async () => {
+    expect(async () => {
+      await deleteNoteUseCase.execute({ noteId: 'xptoFakeId', userId: 'xptoFakeId' });
+    }).rejects.toThrow('Note not found');
+  });
+
+  it('should be able to throw error if user is unauthorized', async () => {
+    const note = makeNote({});
+    noteRepositoryInMemory.notes.push(note);
+    expect(async () => {
+      await deleteNoteUseCase.execute({ noteId: note.id, userId: 'xptoFakeId' });
+    }).rejects.toThrow('Unauthorized');
+  });
 });
