@@ -6,7 +6,7 @@ import { EditNoteUseCase } from './editNoteUseCase';
 let editNoteUseCase: EditNoteUseCase;
 let noteRepositoryInMemory: NoteRepositoryInMemory;
 
-describe('Delete Note - UseCase', () => {
+describe('Edit Note - UseCase', () => {
   beforeEach(() => {
     noteRepositoryInMemory = new NoteRepositoryInMemory();
     editNoteUseCase = new EditNoteUseCase(noteRepositoryInMemory);
