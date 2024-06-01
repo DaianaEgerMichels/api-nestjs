@@ -1,6 +1,8 @@
 import { compare } from 'bcrypt';
 import { UserRepositoryInMemory } from '../../repositories/userRepositoryInMemory';
 import { CreateUserUseCase } from './createUserUseCase';
+import { UserWithSameEmailException } from '../../exceptions/userWithSameEmailException';
+import { makeUser } from '../../factories/userFactory';
 
 let createUserUseCase: CreateUserUseCase;
 let userRepositoryInMemory: UserRepositoryInMemory;
@@ -37,5 +39,18 @@ describe('Create User - UseCase', () => {
     const userHasPasswordHash = await compare(passwordHash, user.password);
 
     expect(userHasPasswordHash).toBeTruthy();
+  });
+
+  it('should not be able to create a new user with same email', async () => {
+    const user = makeUser({});
+    userRepositoryInMemory.users.push(user);
+
+    expect(async () => {
+      await createUserUseCase.execute({
+        name: 'Collen Hover',
+        email: user.email,
+        password: '123xpto',
+      });
+    }).rejects.toThrow(UserWithSameEmailException);
   });
 });

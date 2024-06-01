@@ -33,6 +33,6 @@ describe('Get One Note - UseCase', () => {
     noteRepositoryInMemory.notes.push(note);
     expect(async () => {
       await getNoteUseCase.execute({ noteId: note.id, userId: 'xptoFakeId' });
-    }).rejects.toThrow('Unauthorized');
+    }).rejects.toThrow('No permission to get the note');
   });
 });

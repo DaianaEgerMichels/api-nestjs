@@ -41,6 +41,6 @@ describe('Edit Note - UseCase', () => {
     noteRepositoryInMemory.notes.push(note);
     expect(async () => {
       await editNoteUseCase.execute({ title: 'New Title', noteId: note.id, userId: 'xptoFakeId' });
-    }).rejects.toThrow('Unauthorized');
+    }).rejects.toThrow('No permission to edit the note');
   });
 });
