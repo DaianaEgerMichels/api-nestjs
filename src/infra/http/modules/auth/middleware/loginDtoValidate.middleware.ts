@@ -1,7 +1,9 @@
-import { BadRequestException, Injectable, NestMiddleware } from '@nestjs/common';
+import { Injectable, NestMiddleware } from '@nestjs/common';
 import { NextFunction, Request, Response } from 'express';
 import { LoginDto } from './../dtos/login.dto';
 import { validate } from 'class-validator';
+import { IncorrectValuesException } from 'src/exceptions/incorrectValues.exception';
+import { mapperClassValidationErrorToAppException } from 'src/utils/mappers';
 
 @Injectable()
 export class LoginDtoValidateMiddleware implements NestMiddleware {
@@ -15,7 +17,9 @@ export class LoginDtoValidateMiddleware implements NestMiddleware {
     const validations = await validate(login);
 
     if (validations.length) {
-      throw new BadRequestException(validations);
+      throw new IncorrectValuesException({
+        fields: mapperClassValidationErrorToAppException(validations),
+      });
     }
 
     next();

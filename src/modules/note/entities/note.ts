@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto';
-import { Replace } from 'src/modules/utils/replace';
+import { Replace } from 'src/utils/replace';
 
 interface NoteProps {
   title: string;
