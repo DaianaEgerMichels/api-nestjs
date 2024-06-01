@@ -73,3 +73,18 @@ npm i -D @types/passport-jwt @types/passport-local
 To use validator nestjs:
 npm i --save class-validator class-transformer
 ```
+
+
+## Exceptions
+
+* Pattern:
+
+```
+{
+  message: string
+  fields?: {
+    [key: string]: string
+  }
+}
+
+```
