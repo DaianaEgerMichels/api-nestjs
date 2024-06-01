@@ -2,6 +2,9 @@
 
 ## Description
 
+This is one API with authetication for create, read, delete or updated notes.
+Built with Nest - Typescript.
+
 ## For local use: first step
 
 ```bash
@@ -72,6 +75,13 @@ npm i -D @types/passport-jwt @types/passport-local
 ```
 To use validator nestjs:
 npm i --save class-validator class-transformer
+```
+
+* Swagger:
+
+```
+To use swagger in nestjs:
+npm install --save @nestjs/swagger
 ```
 
 

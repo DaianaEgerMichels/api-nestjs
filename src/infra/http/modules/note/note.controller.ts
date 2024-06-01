@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query, Request } from '@nestjs/common';
 import { AuthRequestModel } from '../auth/models/authRequestModel';
 import { NoteViewModel } from '../user/viewModels/noteViewModel';
-import { CreateNote } from './dtos/createNote.dto';
-import { EditNote } from './dtos/editNote';
+import { CreateNoteDto } from './dtos/createNote.dto';
+import { EditNoteDto } from './dtos/editNote';
 import { CreateNoteUseCase } from 'src/modules/note/useCases/createNoteUseCase/createNoteUseCase';
 import { EditNoteUseCase } from 'src/modules/note/useCases/editNoteUseCase/editNoteUseCase';
 import { DeleteNoteUseCase } from 'src/modules/note/useCases/deleteNoteUseCase/deleteNoteUseCase';
@@ -20,7 +20,7 @@ export class NoteController {
   ) {}
 
   @Post()
-  async createNote(@Request() request: AuthRequestModel, @Body() body: CreateNote) {
+  async createNote(@Request() request: AuthRequestModel, @Body() body: CreateNoteDto) {
     const { title, description } = body;
 
     const user = await this.createNoteUseCase.execute({
@@ -33,7 +33,7 @@ export class NoteController {
   }
 
   @Put(':id')
-  async updateNote(@Request() request: AuthRequestModel, @Param('id') noteId: string, @Body() body: EditNote) {
+  async updateNote(@Request() request: AuthRequestModel, @Param('id') noteId: string, @Body() body: EditNoteDto) {
     const { title, description } = body;
 
     await this.editNoteUseCase.execute({
