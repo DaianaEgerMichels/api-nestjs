@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Param, Post, Put, Request } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Request } from '@nestjs/common';
 import { AuthRequestModel } from '../auth/models/authRequestModel';
 import { NoteViewModel } from '../user/viewModels/noteViewModel';
 import { CreateNote } from './dtos/createNote.dto';
@@ -6,6 +6,7 @@ import { EditNote } from './dtos/editNote';
 import { CreateNoteUseCase } from 'src/modules/note/useCases/createNoteUseCase/createNoteUseCase';
 import { EditNoteUseCase } from 'src/modules/note/useCases/editNoteUseCase/editNoteUseCase';
 import { DeleteNoteUseCase } from 'src/modules/note/useCases/deleteNoteUseCase/deleteNoteUseCase';
+import { GetNoteUseCase } from 'src/modules/note/useCases/getNoteUseCase/getNoteUseCase';
 
 @Controller('notes')
 export class NoteController {
@@ -13,6 +14,7 @@ export class NoteController {
     private createNoteUseCase: CreateNoteUseCase,
     private editNoteUseCase: EditNoteUseCase,
     private deleteNoteUseCase: DeleteNoteUseCase,
+    private getNoteUseCase: GetNoteUseCase,
   ) {}
 
   @Post()
@@ -46,5 +48,15 @@ export class NoteController {
       noteId,
       userId: request.user.id,
     });
+  }
+
+  @Get(':id')
+  async getNote(@Request() request: AuthRequestModel, @Param('id') noteId: string) {
+    const user = await this.getNoteUseCase.execute({
+      noteId,
+      userId: request.user.id,
+    });
+
+    return NoteViewModel.toHtpp(user);
   }
 }
