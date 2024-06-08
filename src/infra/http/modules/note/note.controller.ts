@@ -8,7 +8,9 @@ import { EditNoteUseCase } from 'src/modules/note/useCases/editNoteUseCase/editN
 import { DeleteNoteUseCase } from 'src/modules/note/useCases/deleteNoteUseCase/deleteNoteUseCase';
 import { GetNoteUseCase } from 'src/modules/note/useCases/getNoteUseCase/getNoteUseCase';
 import { GetManyNotesUseCase } from 'src/modules/note/useCases/getManyNotesUseCase/getManyNotesUseCase';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Notes Controller')
 @Controller('notes')
 export class NoteController {
   constructor(

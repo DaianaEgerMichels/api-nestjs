@@ -3,11 +3,13 @@ import { AuthRequestModel } from './models/authRequestModel';
 import { LoginUseCase } from 'src/modules/auth/useCases/loginUseCase/loginUseCase';
 import { LocalAuthGuard } from './guards/localAuth.guard';
 import { Public } from './decorators/isPublic';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('/auth')
 export class AuthController {
   constructor(private loginUseCase: LoginUseCase) {}
 
+  @ApiTags('Auth Controller')
   @Post('/login')
   @Public()
   @HttpCode(HttpStatus.OK)

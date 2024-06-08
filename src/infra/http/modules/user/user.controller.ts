@@ -1,7 +1,9 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { CreateUserUseCase } from 'src/modules/user/useCases/createUserUseCase/createUserUseCase';
 import { CreateUserDto } from './dtos/createUser.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Users Controller')
 @Controller('users')
 export class UserController {
   constructor(private userUseCase: CreateUserUseCase) {}
